@@ -1,0 +1,46 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "GetList";
+}
+<h2>List Product</h2>
+<div class="alert-success">@TempData["message"]</div>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.name</td>
+                <td>@product.price</td>
+                <td>
+                <a href="/Product/Update?id=@product.id">Edit</a> | <a href="#" id="@product.id" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    var listBtnDelete = document.getElementByClassName("btn-delete");
+    for (var i = 0; i < listBtnDelete.length; i++) {
+        listBtnDelete[i].onclick = function () {
+            if (confirm("Are you sure?")) {
+                var currentDeleteButton = this;
+                var deleteId = id;
+                var xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert("Delete success");
+                    }
+                }
+                xmlHttpRequest.open("DELETE", "/Product/Delete?id=" + deleteId, true);
+            }
+        };
+    }
+
+</script>

@@ -1,0 +1,13 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Update";
+}
+<h2>Update Name: @Model.name</h2>
+<div>
+    <form method="post" action="SaveUpdate">
+        <input type="hidden" name="Id" value="@Model.id" />
+        <input type="text" name="Name" value="@Model.name" placeholder="Name" />
+        <input type="number" name="Price" value="@Model.price" placeholder="Price" />
+        <input type="submit" />
+    </form>
+</div>
